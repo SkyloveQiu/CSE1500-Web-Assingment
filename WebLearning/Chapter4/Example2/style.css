@@ -1,6 +1,11 @@
-.comments p:nth-last-child(even) {
+.comment p:nth-child(even) {
     background: lavender;
 }
-.comments p:nth-child(odd) {
+
+.comment p:nth-child(odd) {
     background: gainsboro;
+}
+
+.comment-input button {
+    cursor: pointer;
 }
