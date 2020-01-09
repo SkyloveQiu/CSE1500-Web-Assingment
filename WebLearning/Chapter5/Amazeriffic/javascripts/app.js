@@ -2,17 +2,17 @@ var main = function(toDoObjects) {
     "use strict";
 
     var toDos = toDoObjects.map(function(toDo) {
-        return toDo.discription;
+        return toDo.description;
     });
 
-
+    console.log(toDos);
 
 
 
     $(".tabs a span").toArray().forEach(function(element) {
         $(element).on("click",function(){
             var $element = $(element);
-            var $content;
+            var $content,$input,$button;
             $(".tabs a span").removeClass("active");
             $element.addClass("active");
             $("main .content").empty();
@@ -30,6 +30,15 @@ var main = function(toDoObjects) {
                 
             } else if ($element.parent().is(":nth-child(3)")) {
                 console.log("Third tab clicked!");
+            } else if ($element.parent().is(":nth-child(4)")) {
+                $input = $("<input>");
+                $button = $("<button>").text("+");
+                $button.on("click",function(){
+                    toDos.push($input.val());
+                    $input.val("");
+                });
+
+                $content = $(".content").append($input).append($button);
             }
 
             return false;
