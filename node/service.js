@@ -10,13 +10,25 @@ function start(route,handle) {
 
 
     function OnRequest(request, response) { 
-        var pathname = url.parse(request.url).pathname;
-        console.log("Request for "+ pathname+" recevied.");
-        
-        response.writeHead(200, {"Content-Type": "text/plain"}); 
+        var postData = "";
 
-        response.write(route(handle,pathname));
-        response.end();
+        var pathname = url.parse(request.url).pathname;
+
+        console.log("Request for " + pathname + " reveived.");
+
+        request.setEncoding("utf8");
+
+        request.addListener("data",function(postDataChunk) {
+            postData += postDataChunk;
+
+            console.log("Receive POST data chunk" + postDataChunk + ".");
+
+            
+        });
+
+        request.addListener("end",function () {
+            route(handle,pathname,response,postData);
+          });
     }
     
     http.createServer(OnRequest).listen(8888);
