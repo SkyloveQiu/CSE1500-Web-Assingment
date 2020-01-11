@@ -16,19 +16,8 @@ function start(route,handle) {
 
         console.log("Request for " + pathname + " reveived.");
 
-        request.setEncoding("utf8");
-
-        request.addListener("data",function(postDataChunk) {
-            postData += postDataChunk;
-
-            console.log("Receive POST data chunk" + postDataChunk + ".");
-
-            
-        });
-
-        request.addListener("end",function () {
-            route(handle,pathname,response,postData);
-          });
+        route(handle,pathname,response,request);
+          
     }
     
     http.createServer(OnRequest).listen(8888);
