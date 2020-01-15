@@ -1,0 +1,52 @@
+
+.title h1 {
+    text-align: center;
+    color: brown;
+}
+
+.title p {
+    text-align: center;
+    color: cadetblue;
+}
+
+.title a {
+    float: right;
+    color: aqua;
+    background-image: url(../images/github.png);
+}
+
+body{
+    background-image: url(../images/background.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #cccccc;
+}
+
+
+main {
+    text-align: center;
+   
+}
+
+.Introduce {
+    border-color: coral;
+    border-width: 2px;
+    border-style: solid;
+    max-width: 400px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.startGame {
+    margin-left:auto;
+    margin-right:auto;
+    width: 100px;
+    height: 50px;
+}
+
+.startGame img {
+    width : 100%;
+    height: auto;
+}
