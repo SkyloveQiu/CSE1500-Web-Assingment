@@ -1,0 +1,31 @@
+body {
+    width: 800px;
+    margin: auto;
+    background: lightcyan;
+    color: blue;
+}
+
+h1{
+    text-align: center;
+}
+
+p {
+    border: 1px solid gray;
+    padding: 10px;
+}
+
+span {
+    color: aqua;
+}
+
+
+div{
+    font-size: 200%;
+}
+
+
+
+a{
+    color: violet;
+    font-size: 400%;
+}
