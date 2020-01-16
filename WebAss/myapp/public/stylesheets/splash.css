@@ -1,0 +1,57 @@
+
+.title {
+    text-align: center;
+    font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+    font-size: larger;
+
+}
+
+
+body{
+    background-image: url(../images/gray_jean.png);
+    background-position: center center;
+    background-repeat: repeat;
+
+}
+
+
+main {
+    text-align: center;
+
+}
+
+.Introduce {
+
+
+    max-width: 1000px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: auto;
+    font-family:Verdana, Geneva, sans-serif;
+}
+
+.startGame {
+    margin-left:auto;
+    margin-right:auto;
+    width: 200px;
+    height: 50px;
+    margin-top: auto;
+    margin-bottom: auto;
+
+}
+
+.startGame img {
+    width : 50%;
+    height: auto;
+    margin-bottom: auto;
+
+}
+
+.image {
+    margin-top: 100px
+;
+
+}
+
+
+
