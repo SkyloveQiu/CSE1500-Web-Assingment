@@ -78,8 +78,8 @@ Game.prototype.addPlayer = function(player) {
         return new Error("Invalid call to addPlayer, current state is " + this.gameState);
     }
 
-    if(this.white === null) {
-        this.white = player;
+    if(this.red === null) {
+        this.red = player;
         this.setState("1 JOINT");
         return "Red";
     } else {
