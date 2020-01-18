@@ -1,5 +1,5 @@
-var Game = function(gameID) {
-    this.id = gameID;
+var Game = function(id) {
+    this.id = id;
     this.red = null;
     this.black = null;
     this.gameState = "0 JOINT";
