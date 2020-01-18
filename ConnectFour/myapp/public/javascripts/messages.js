@@ -16,7 +16,8 @@
     exports.O_MAKE_A_MOVE = {
         type: exports.T_MAKE_A_MOVE,
         data: {
-            position:null,
+            collum:null,
+            rows:null,
             player:null
         }
     };
