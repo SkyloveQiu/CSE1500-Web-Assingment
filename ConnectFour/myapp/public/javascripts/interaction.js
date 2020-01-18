@@ -1,6 +1,4 @@
 (function setup() {
-    const gameObject = new GameObject('#game');
-    var dropMusic = new Audio("../music/click.wav");
     var socket = new WebSocket("ws://localhost:3000");
 
     const gameObject = new GameObject('#game',socket);
@@ -9,7 +7,8 @@
         let incomingMessage = JSON.parse(event.data);
         let $clicked = null;
 
-        if (incomingMessage.type === "START-GAME") {
+        if (incomingMessage.type === Messages.S_START_GAME) {
+            console.log(incomingMessage);
             gameObject.setTurn(true);
         }
 
@@ -32,5 +31,6 @@
             gameObject.updateGameState(collum,row,player,true);
         }
      }
+     console.log("game ready");
 
 })();

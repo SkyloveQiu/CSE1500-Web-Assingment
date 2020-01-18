@@ -3,7 +3,7 @@ var http = require("http");
 var websocket = require("ws");
 var Game = require("./server/game")
 
-var messages = require("./public/javascripts/message")
+var messages = require("./public/javascripts/messages")
 var gameStatus = require("./server/gameStatus");
 
 
@@ -27,16 +27,18 @@ var websocketsClient = {};
 
 setInterval(function () {
     for (let i in websocketsClient) {
-        let gameObj = websockets[i];
+        let gameObj = websocketsClient[i];
         if (gameObj.finalGamestate()) {
             console.log("Deleting element " + i);
-            delete websockets[i];
+            delete websocketsClient[i];
         }
     }
 }, 50000);
 
+console.log(gameStatus.gameInitialized);
+var currentGame = new Game(0);
 
-var currentGame = new Game(gameStatus.gamesInitialized++);
+console.log(currentGame);
 var connectionID = 0; //each websocket receives a unique ID
 
 
@@ -44,11 +46,11 @@ WebSocketServer.on("connection", function connection(ws) {
     console.log("connected....");
     let newPlayer = ws;
     newPlayer.id = connectionID++;
-    let playerType = pendingGame.addPlayer(newPlayer);
+    let playerType = currentGame.addPlayer(newPlayer);
     gameStatus.playersConnected++;
-    websockets[newPlayer.id] = pendingGame;
+    websocketsClient[newPlayer.id] = currentGame;
 
-    console.log("Player %s placed in game %s as %s", newPlayer.id, pendingGame.id, playerType);
+    console.log("Player %s placed in game %s as %s", newPlayer.id, currentGame.id, playerType);
 
     /*
      * Inform the client about its assigned player type
@@ -56,16 +58,16 @@ WebSocketServer.on("connection", function connection(ws) {
 
     newPlayer.send((playerType === "Red") ? messages.S_PLAYER_RED : messages.S_PLAYER_BLACK);
 
-    if (pendingGame.hasTwoConnectedPlayers()) {
-        pendingGame.setState("Red TURN");
-        pendingGame.white.send(messages.S_START_GAME);
-        pendingGame = new Game(connectionID);//gameStatus.gamesInitialized++
+    if (currentGame.hasTwoConnectedPlayers()) {
+        currentGame.setState("Red TURN");
+        currentGame.red.send(messages.S_START_GAME);
+        currentGame = new Game(gameStatus.gamesInitialized++);//gameStatus.gamesInitialized++
     }
 
     newPlayer.on("message", function incoming(message) {
         let mess = JSON.parse(message);
 
-        let gameObj = websockets[newPlayer.id];
+        let gameObj = websocketsClient[newPlayer.id];
         let isPlayerRed = (gameObj.red === newPlayer);
         
         if (gameObj.hasTwoConnectedPlayers()) {
@@ -75,7 +77,7 @@ WebSocketServer.on("connection", function connection(ws) {
                     gameObj.black.send(message);  
                 } else {
                     gameObj.setState("Red TURN");
-                    gameObj.white.send(message);
+                    gameObj.red.send(message);
                 }
                 if (mess.type === messages.T_GAME_WON) {
                     gameStatus.gamesWon++;
@@ -83,7 +85,7 @@ WebSocketServer.on("connection", function connection(ws) {
                         gameObj.black.send(messages.S_YOU_LOST);
                         gameObj.setState("Red WON");
                     } else {
-                        gameObj.white.send(messages.S_YOU_LOST);
+                        gameObj.red.send(messages.S_YOU_LOST);
                         gameObj.setState("Black WON");
                     }
                 }
@@ -95,7 +97,7 @@ WebSocketServer.on("connection", function connection(ws) {
         console.log(newPlayer.id + " disconnected...");
 
         if (code == "1001") {
-            let gameObj = websockets[newPlayer.id];
+            let gameObj = WebSocketServer[newPlayer.id];
 
             if (gameObj.isValidTransition(gameObj.gameState, "ABORTED")) {
                 gameObj.setState("ABORTED");
@@ -106,7 +108,7 @@ WebSocketServer.on("connection", function connection(ws) {
                 gameObj.Red = null;
                 gameStatus.playersConnected--;
             } catch (e) {
-                console.log("White player closing: " + e);
+                console.log("red player closing: " + e);
             }
 
             try {
