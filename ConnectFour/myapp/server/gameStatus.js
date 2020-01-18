@@ -1,5 +1,5 @@
 var gameStatus = {
-    since : Date.now(),
+    playerConnected : 0,
     gameInitialized : 0,
     gameAborted: 0,
     gameCompleted :0
