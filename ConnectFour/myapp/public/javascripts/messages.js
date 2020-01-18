@@ -17,7 +17,7 @@
         type: exports.T_MAKE_A_MOVE,
         data: {
             collum:null,
-            rows:null,
+            row:null,
             player:null
         }
     };

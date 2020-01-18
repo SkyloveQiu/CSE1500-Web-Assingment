@@ -16,6 +16,7 @@ class GameObject {
             [0,0,0,0,0,0,0], // 0 means nothing, 1 means red , 2 means black XD.
         ]
         
+        
     }
 
 
@@ -76,7 +77,7 @@ class GameObject {
             message.data.collum = collum;
             message.data.row = row;
             message.data.player = this.player;
-            mess = JSON.stringify(message);
+            let mess = JSON.stringify(message);
             this.socket.send(mess);
             this.turn = false;
 
@@ -100,7 +101,7 @@ class GameObject {
         var that = this;
         
         function findLastEmptyCell(collum) {
-            if (that.turn == true) {
+            if (that.turn === true) {
                 const cellList = $(`.collum[data-collum='${collum}']`)
                 for (let i = cellList.length; i >= 0; i--) {
                     const $cell = $(cellList[i]);
@@ -113,23 +114,25 @@ class GameObject {
         }
 
         $board.on('mouseenter','.collum.empty',function() {
-            if (that.turn == true) {
+            if (that.turn === true) {
                 const collum = $(this).data('collum');
-                const $lastEmptyCell = findLastEmptyCell(collum);
+                const cellList = findLastEmptyCell(collum);
+                const $lastEmptyCell = cellList[0];
                 $lastEmptyCell.addClass("highLight");
             }
         })
 
 
         $board.on('mouseleave','.collum', function() {
-            if (that.turn == true) {
+            if (that.turn === true) {
                 $('.collum').removeClass("highLight");
             }
         })
 
 
         $board.on('click','.collum.empty',function () { 
-            if (that.turn == true) {
+            console.log(that.turn);
+            if (that.turn === true) {
                 const collum = $(this).data("collum");
                 const result = findLastEmptyCell(collum);
                 const $lastEmptyCell = result[0];
@@ -139,7 +142,7 @@ class GameObject {
             }
          })
 
-
+         console.log("set up");
     }
 
 
