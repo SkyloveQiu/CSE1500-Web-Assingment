@@ -61,6 +61,7 @@ WebSocketServer.on("connection", function connection(ws) {
     if (currentGame.hasTwoConnectedPlayers()) {
         currentGame.setState("Red TURN");
         currentGame.red.send(messages.S_START_GAME);
+        console.log(currentGame.red);
         currentGame = new Game(gameStatus.gamesInitialized++);//gameStatus.gamesInitialized++
     }
 
