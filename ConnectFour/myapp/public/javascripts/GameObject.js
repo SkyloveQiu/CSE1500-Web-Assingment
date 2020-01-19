@@ -62,7 +62,7 @@ class GameObject {
             let mess = JSON.stringify(message);
             this.socket.send(mess);
             this.turn = false;
-
+            $("#GameStatus .Status").text("It's not your turn. please wait for other user to opperate!");
 
 
         }

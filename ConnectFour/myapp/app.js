@@ -13,6 +13,7 @@ var app = express();
 app.use(express.static(__dirname+"/public"));
 
 app.get('/',(req,res) => {
+    console.log(gameStatus.gameInitialized);
     res.render("/Users/skylove/CSE1500/Web-Assignment/ConnectFour/myapp/views/splash.ejs",{ players_connected: gameStatus.playerConnected, games_won: gameStatus.gameCompleted, game_init: gameStatus.gameInitialized})
 })
 
@@ -48,6 +49,7 @@ WebSocketServer.on("connection", function connection(ws) {
     newPlayer.id = connectionID++;
     let playerType = currentGame.addPlayer(newPlayer);
     gameStatus.playersConnected++;
+    console.log(gameStatus.playerConnected);
     websocketsClient[newPlayer.id] = currentGame;
 
     console.log("Player %s placed in game %s as %s", newPlayer.id, currentGame.id, playerType);
@@ -61,7 +63,6 @@ WebSocketServer.on("connection", function connection(ws) {
     if (currentGame.hasTwoConnectedPlayers()) {
         currentGame.setState("Red TURN");
         currentGame.red.send(messages.S_START_GAME);
-        console.log(currentGame.red);
         currentGame = new Game(gameStatus.gamesInitialized++);//gameStatus.gamesInitialized++
     }
 
@@ -88,7 +89,8 @@ WebSocketServer.on("connection", function connection(ws) {
         if (gameObj.hasTwoConnectedPlayers()) {
             if (mess.type === messages.T_MAKE_A_MOVE) {
                 if (isPlayerRed) {
-                    let incomingMessage = JSON.parse(message.data);
+                    console.log(message)
+                    let incomingMessage = JSON.parse(message);
                     let collum = incomingMessage.data.collum;
                     let row = incomingMessage.data.row;                
                     let result = changeMatrixStatus(row,collum,1,gameObj);
@@ -103,7 +105,7 @@ WebSocketServer.on("connection", function connection(ws) {
 
                      
                 } else {
-                    let incomingMessage = JSON.parse(message.data);
+                    let incomingMessage = JSON.parse(message);
                     let collum = incomingMessage.data.collum;
                     let row = incomingMessage.data.row;                
                     let result = changeMatrixStatus(row,collum,2,gameObj);
