@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1d912c8a-aa6a-4e09-a573-b9bfb6468729" name="Default Changelist" comment="" />
+    <list default="true" id="1d912c8a-aa6a-4e09-a573-b9bfb6468729" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../ConnectFour/myapp/public/game.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ConnectFour/myapp/public/game.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ConnectFour/myapp/public/javascripts/GameObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ConnectFour/myapp/public/javascripts/GameObject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game.html" beforeDir="false" afterPath="$PROJECT_DIR$/game.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +19,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
   <component name="ProjectId" id="1WTxtGeRVRhJ51zNGXVLxno8yKh" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -49,6 +58,8 @@
       <option name="presentableId" value="Default" />
       <updated>1579187598847</updated>
       <workItem from="1579187600125" duration="5319000" />
+      <workItem from="1579391804592" duration="49000" />
+      <workItem from="1579451342129" duration="81000" />
     </task>
     <servers />
   </component>
