@@ -40,6 +40,21 @@
             gameObject.setTurn(true);
             $("#GameStatus .Status").text("It's your turn.");
         }
+
+
+        if (incomingMessage.type === Messages.T_YOU_LOST) {
+            gameObject.setTurn(false);
+            alert("You lost this game");
+        }
+
+        if (incomingMessage.type === Messages.T_GAME_WON) {
+            gameObject.setTurn(false);
+            alert("You win this game");
+        }
+
+
+
+
      }
      console.log("game ready");
 
