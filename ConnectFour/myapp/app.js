@@ -4,7 +4,7 @@ var websocket = require("ws");
 var Game = require("./server/game")
 
 var messages = require("./public/javascripts/messages")
-var gameStatus = require("./server/gameStatus");
+var gameStatusObj = gameStatus();
 
 
 var port = 3000;
@@ -13,8 +13,7 @@ var app = express();
 app.use(express.static(__dirname+"/public"));
 
 app.get('/',(req,res) => {
-    console.log(gameStatus.gameInitialized);
-    res.render("/Users/skylove/CSE1500/Web-Assignment/ConnectFour/myapp/views/splash.ejs",{ players_connected: gameStatus.playerConnected, games_won: gameStatus.gameCompleted, game_init: gameStatus.gameInitialized})
+    res.render("/Users/skylove/CSE1500/Web-Assignment/ConnectFour/myapp/views/splash.ejs",{ players_connected: gameStatusObj.getPlayerConnected(), games_won: gameStatusObj.getGameCompleted(), game_init: gameStatusObj.getGameInitialized()})
 })
 
 app.get('/game', function (req, res) {
@@ -36,7 +35,6 @@ setInterval(function () {
     }
 }, 50000);
 
-console.log(gameStatus.gameInitialized);
 var currentGame = new Game(0);
 
 console.log(currentGame);
@@ -48,8 +46,8 @@ WebSocketServer.on("connection", function connection(ws) {
     let newPlayer = ws;
     newPlayer.id = connectionID++;
     let playerType = currentGame.addPlayer(newPlayer);
-    gameStatus.playersConnected++;
-    console.log(gameStatus.playerConnected);
+    gameStatusObj.addPlayerConnected();
+    console.log(gameStatus.getPlayerConnected());
     websocketsClient[newPlayer.id] = currentGame;
 
     console.log("Player %s placed in game %s as %s", newPlayer.id, currentGame.id, playerType);
@@ -63,7 +61,8 @@ WebSocketServer.on("connection", function connection(ws) {
     if (currentGame.hasTwoConnectedPlayers()) {
         currentGame.setState("Red TURN");
         currentGame.red.send(messages.S_START_GAME);
-        currentGame = new Game(gameStatus.gamesInitialized++);//gameStatus.gamesInitialized++
+        currentGame = new Game(gameStatusObj.getGameInitialized());
+        gameStatusObj.addGameInitialzed();
     }
 
     
@@ -144,7 +143,7 @@ WebSocketServer.on("connection", function connection(ws) {
             try {
                 gameObj.Red.close();
                 gameObj.Red = null;
-                gameStatus.playersConnected--;
+                gameStatusObj.removePlayerConnected();
             } catch (e) {
                 console.log("red player closing: " + e);
             }
@@ -152,7 +151,7 @@ WebSocketServer.on("connection", function connection(ws) {
             try {
                 gameObj.black.close();
                 gameObj.black = null;
-                gameStatus.playersConnected--;
+                gameStatusObj.removePlayerConnected();
             } catch(e) {
                 // TODO: fix bug
                 console.log("Black player closing: " + e);

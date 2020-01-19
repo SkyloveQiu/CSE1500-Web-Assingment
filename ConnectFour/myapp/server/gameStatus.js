@@ -25,9 +25,29 @@ class gameStatus {
         this.playerConnected = this.playerConnected - 1;
     }
 
+    getGameInitialized() {
+        return this.gameInitialized;
+    }
 
+    addGameInitialzed() {
+        this.gameInitialized = this.gameInitialized + 1;
+    }
 
+    getGameAborted() {
+        return this.gameAborted;
+    }
 
+    addGameAborted() {
+        this.gameAborted = this.gameAborted + 1;
+    }
+
+    getGameCompleted() {
+        return this.gameCompleted;
+    }
+
+    addGameCompleted() {
+        this.gameCompleted = this.gameCompleted + 1;
+    }
 
 
 }
