@@ -21,7 +21,11 @@
             player:null
         }
     };
-
+    exports.T_INVALID_DROP = "INVALID-MOVE";
+    exports.O_INVALID_DROP = {
+        type: exports.T_INVALID_DROP
+    }
+    exports.S_INVALID_DROP = JSON.stringify(exports.O_INVALID_DROP);
     exports.T_YOU_LOST = "YOU_LOST";
     exports.O_YOU_LOST = {
         type: exports.T_YOU_LOST

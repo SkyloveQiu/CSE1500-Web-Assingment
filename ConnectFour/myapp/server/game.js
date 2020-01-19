@@ -3,6 +3,14 @@ var Game = function(id) {
     this.red = null;
     this.black = null;
     this.gameState = "0 JOINT";
+    this.gameMatrix = [
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0], // 0 means nothing, 1 means red , 2 means black XD.
+    ];
 };
 
 Game.prototype.transitionStates = {};
@@ -25,6 +33,10 @@ Game.prototype.transitionMatrix = [
     [0, 0, 0, 0, 0, 0, 0, 0],   // B WON
     [0, 0, 0, 0, 0, 0, 0, 0],   // ABORTED
 ];
+
+
+
+
 Game.prototype.isValidTransition = function(from, to) {
     
     console.assert(typeof from == "string", "%s: Expecting a string, got a %s", arguments.callee.name, typeof from);
