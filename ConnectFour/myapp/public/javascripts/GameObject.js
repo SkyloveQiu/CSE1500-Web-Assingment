@@ -7,27 +7,13 @@ class GameObject {
         this.socket = socket;
         this.player = null;
         this.turn = false;
-        this.gameMatrix = [
-            [0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0], // 0 means nothing, 1 means red , 2 means black XD.
-        ]
+        
         
         
     }
 
 
-    getMatrix() {
-        return this.gameMatrix;
-    }
-
-    setMatrix(gameMatrix) {
-        this.gameMatrix = gameMatrix;
-    }
-
+   
     getPlayer() {
         return this.player;
     }
@@ -67,11 +53,7 @@ class GameObject {
             const cellList = $(`.collum[data-collum='${collum}']`);
             const $cell = $(cellList[row]);
             this.occupyCell($cell,player);
-            if (this.player == "black") {
-                this.gameMatrix[row][collum] = 2; 
-            } else {
-                this.gameMatrix[row][collum] = 1;
-            }
+            
         } else {
             let message = Messages.O_MAKE_A_MOVE;
             message.data.collum = collum;

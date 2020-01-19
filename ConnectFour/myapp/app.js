@@ -65,6 +65,20 @@ WebSocketServer.on("connection", function connection(ws) {
         currentGame = new Game(gameStatus.gamesInitialized++);//gameStatus.gamesInitialized++
     }
 
+    
+
+    function changeMatrixStatus(row,collum,color,gameObject) {
+        if (gameObject.gameMatrix[row][collum] !== 0) {
+            return false;
+        } else {
+            gameObject.gameMatrix[row][collum] = color;
+            return true;
+        }
+    } 
+
+
+
+
     newPlayer.on("message", function incoming(message) {
         let mess = JSON.parse(message);
 
@@ -74,22 +88,43 @@ WebSocketServer.on("connection", function connection(ws) {
         if (gameObj.hasTwoConnectedPlayers()) {
             if (mess.type === messages.T_MAKE_A_MOVE) {
                 if (isPlayerRed) {
-                    gameObj.setState("Black TURN");
-                    gameObj.black.send(message);  
+                    let incomingMessage = JSON.parse(message.data);
+                    let collum = incomingMessage.data.collum;
+                    let row = incomingMessage.data.row;                
+                    let result = changeMatrixStatus(row,collum,1,gameObj);
+                    if(result === false) {
+                        gameObj.red.send(messages.S_INVALID_DROP);
+                        console.log("Invalid move!");
+                    }else {
+                        gameObj.setState("Black TURN");
+                        gameObj.black.send(message); 
+                    }
+
+
+                     
                 } else {
-                    gameObj.setState("Red TURN");
-                    gameObj.red.send(message);
-                }
-                if (mess.type === messages.T_GAME_WON) {
-                    gameStatus.gamesWon++;
-                    if (isPlayerRed) {
-                        gameObj.black.send(messages.S_YOU_LOST);
-                        gameObj.setState("Red WON");
-                    } else {
-                        gameObj.red.send(messages.S_YOU_LOST);
-                        gameObj.setState("Black WON");
+                    let incomingMessage = JSON.parse(message.data);
+                    let collum = incomingMessage.data.collum;
+                    let row = incomingMessage.data.row;                
+                    let result = changeMatrixStatus(row,collum,2,gameObj);
+                    if(result === false) {
+                        gameObj.black.send(messages.S_INVALID_DROP);
+                        console.log("Invalid move!");
+                    }else {
+                        gameObj.setState("Red TURN");
+                        gameObj.red.send(message); 
                     }
                 }
+                // if (mess.type === messages.T_GAME_WON) {
+                //     gameStatus.gamesWon++;
+                //     if (isPlayerRed) {
+                //         gameObj.black.send(messages.S_YOU_LOST);
+                //         gameObj.setState("Red WON");
+                //     } else {
+                //         gameObj.red.send(messages.S_YOU_LOST);
+                //         gameObj.setState("Black WON");
+                //     }
+                // }
             }
         }
     });
@@ -98,7 +133,7 @@ WebSocketServer.on("connection", function connection(ws) {
         console.log(newPlayer.id + " disconnected...");
 
         if (code == "1001") {
-            let gameObj = WebSocketServer[newPlayer.id];
+            let gameObj = websocketsClient[newPlayer.id];
 
             if (gameObj.isValidTransition(gameObj.gameState, "ABORTED")) {
                 gameObj.setState("ABORTED");
@@ -117,6 +152,7 @@ WebSocketServer.on("connection", function connection(ws) {
                 gameObj.black = null;
                 gameStatus.playersConnected--;
             } catch(e) {
+                // TODO: fix bug
                 console.log("Black player closing: " + e);
             }
         }
