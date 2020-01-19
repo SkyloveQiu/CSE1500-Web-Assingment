@@ -198,17 +198,19 @@ WebSocketServer.on("connection", function connection(ws) {
                     let row = incomingMessage.data.row;                
                     let result = changeMatrixStatus(row,collum,1,gameObj);
                     let gameResult = CheckForWinner(collum,row,gameObj,1);
+                    
+                    if(result === false) {
+                        gameObj.red.send(messages.S_INVALID_DROP);
+                        console.log("Invalid move!");
+                    }else {
+                        gameObj.setState("Black TURN");
+                        gameObj.black.send(message); 
+                    
+                    }
+
                     if(gameResult === true) {
                         gameObj.red.send(messages.S_GAME_WON);
                         gameObj.black.send(messages.S_YOU_LOST);
-                    } else {
-                        if(result === false) {
-                            gameObj.red.send(messages.S_INVALID_DROP);
-                            console.log("Invalid move!");
-                        }else {
-                            gameObj.setState("Black TURN");
-                            gameObj.black.send(message); 
-                        }
                     }
 
                      
@@ -218,18 +220,19 @@ WebSocketServer.on("connection", function connection(ws) {
                     let row = incomingMessage.data.row;                
                     let result = changeMatrixStatus(row,collum,2,gameObj);
                     let gameResult = CheckForWinner(collum,row,gameObj,2);
+                    
+                    if(result === false) {
+                        gameObj.black.send(messages.S_INVALID_DROP);
+                        console.log("Invalid move!");
+                    }else {
+                        gameObj.setState("Red TURN");
+                        gameObj.red.send(message); 
+                    }
                     if(gameResult === true) {
                         gameObj.black.send(messages.S_GAME_WON);
                         gameObj.red.send(messages.S_YOU_LOST);
-                    } else {
-                        if(result === false) {
-                            gameObj.black.send(messages.S_INVALID_DROP);
-                            console.log("Invalid move!");
-                        }else {
-                            gameObj.setState("Red TURN");
-                            gameObj.red.send(message); 
-                        }
                     }
+                    
                 }
                 // if (mess.type === messages.T_GAME_WON) {
                 //     gameStatus.gamesWon++;
