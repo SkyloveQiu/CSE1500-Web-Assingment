@@ -1,10 +1,14 @@
+
+
 var express = require("express");
 var http = require("http");
 var websocket = require("ws");
 var Game = require("./server/game")
+var GameStatus = require("./server/GameStatus");
+
 
 var messages = require("./public/javascripts/messages")
-var gameStatusObj = gameStatus();
+var gameStatusObj = new GameStatus();
 
 
 var port = 3000;
@@ -47,7 +51,7 @@ WebSocketServer.on("connection", function connection(ws) {
     newPlayer.id = connectionID++;
     let playerType = currentGame.addPlayer(newPlayer);
     gameStatusObj.addPlayerConnected();
-    console.log(gameStatus.getPlayerConnected());
+    console.log(gameStatusObj.getPlayerConnected());
     websocketsClient[newPlayer.id] = currentGame;
 
     console.log("Player %s placed in game %s as %s", newPlayer.id, currentGame.id, playerType);

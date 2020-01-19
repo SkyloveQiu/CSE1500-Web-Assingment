@@ -5,7 +5,7 @@
 //     gameCompleted :0
 // };
 
-class gameStatus {
+class GameStatus {
     constructor() {
         this.playerConnected = 0;
         this.gameInitialized = 0;
@@ -14,7 +14,7 @@ class gameStatus {
     }
 
     getPlayerConnected() {
-        return this.gameCompleted;
+        return this.playerConnected;
     }
 
     addPlayerConnected() {
@@ -51,3 +51,5 @@ class gameStatus {
 
 
 }
+
+module.exports = GameStatus;
