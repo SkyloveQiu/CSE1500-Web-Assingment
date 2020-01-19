@@ -3,6 +3,14 @@ var Game = function(id) {
     this.red = null;
     this.black = null;
     this.gameState = "0 JOINT";
+    this.gameMatrix = [
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0], // 0 means nothing, 1 means red , 2 means black XD.
+    ];
 };
 
 Game.prototype.transitionStates = {};
@@ -27,14 +35,6 @@ Game.prototype.transitionMatrix = [
 ];
 
 
-Game.prototype.gameMatrix  = [
-    [0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0], // 0 means nothing, 1 means red , 2 means black XD.
-]
 
 
 Game.prototype.isValidTransition = function(from, to) {
