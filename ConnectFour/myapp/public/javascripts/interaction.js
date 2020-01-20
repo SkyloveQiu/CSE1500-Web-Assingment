@@ -6,7 +6,6 @@
     socket.onmessage = function (event) { 
         console.log("message recieved");
         let incomingMessage = JSON.parse(event.data);
-        let $clicked = null;
         console.log(incomingMessage);
         if (incomingMessage.type === "START-GAME") {
             console.log(incomingMessage);

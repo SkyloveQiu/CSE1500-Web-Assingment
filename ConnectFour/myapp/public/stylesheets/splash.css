@@ -1,52 +1,65 @@
 
-.title h1 {
+.title {
     text-align: center;
-    color: brown;
+    font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+    font-size: larger;
+
 }
 
-.title p {
-    text-align: center;
-    color: cadetblue;
-}
-
-.title a {
-    float: right;
-    color: aqua;
-    background-image: url(../images/github.png);
-}
 
 body{
-    background-image: url(../images/background.png);
+    background-image: url(../images/gray_jean.png);
     background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    background-color: #cccccc;
+    background-repeat: repeat;
+
 }
 
 
 main {
     text-align: center;
-   
+
 }
 
 .Introduce {
-    border-color: coral;
-    border-width: 2px;
-    border-style: solid;
-    max-width: 400px;
+
+
+    max-width: 1000px;
     margin-left:auto;
     margin-right:auto;
+    margin-top: auto;
+    font-family:Verdana, Geneva, sans-serif;
 }
 
 .startGame {
     margin-left:auto;
     margin-right:auto;
-    width: 100px;
+    width: 200px;
     height: 50px;
+    margin-top: auto;
+    margin-bottom: auto;
+
 }
 
 .startGame img {
-    width : 100%;
+    width : 50%;
     height: auto;
+    margin-bottom: auto;
+
+
 }
+
+.startGame:hover{
+    transform: scale(1.2);
+}
+
+
+.image {
+    margin-top: 100px
+;
+
+}
+
+
+
+
+

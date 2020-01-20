@@ -14,23 +14,28 @@
 
   <body>
 
-    <audio src="music/game.mp3" controls>	
+    <audio id="bgm" src="music/game.mp3" , autoplay="autoplay">
       <p>Fallback content goes here.</p>
       </audio>
+    <img src="images/speaker.png " height="50" width="50" onclick="document.getElementById('bgm').pause()">
 
-    <h4>Hello,world!</h4>
+    <h1>Connect 4 </h1>
 
-    <div id="game"></div>
-<<<<<<< HEAD
+
+    <div id="GameStatus">
+
+      <h2 class="Status">Current Status</h2>
+    </div>
+
+    <div id="game">
+    </div>
 
     <audio id="audio" src="./music/piecesFalling.wav" autoplay="false" ></audio>
-    <a onclick="playSound();"> Play</a>
 
-=======
-    <div id="GameStatus">
-      <p class="Status">Current Status</p>
-    </div>
->>>>>>> 7c4dbca42b39bd2572ddff3ca572f42b053df9cb
+
+
+
+
   </body>
   
   

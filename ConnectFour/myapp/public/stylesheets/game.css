@@ -1,10 +1,23 @@
 body{
+
     text-align: center;
+    background-color: aliceblue;
+    
 }
 
+body h1{
+    font-family: Monaco;
+    color: lightslategray;
+
+}
+
+
 #game {
-    background-color: blue;
+
+    background-color: cadetblue;
     display: inline-block;
+    align-content: center;
+
 }
 
 .collum {
@@ -16,6 +29,19 @@ body{
     margin: 5px;
 
 }
+
+#GameStatus{
+    border-style: groove;
+    border-color: lightslategray;
+    border-radius: 20px;
+    border
+    position: center;
+    text-align: center;
+
+}
+
+
+
 
 .empty {
     cursor: pointer;
@@ -30,5 +56,5 @@ body{
 }
 
 .red {
-    background-color: red;
+    background-color: palevioletred;
 }

@@ -122,17 +122,14 @@ class GameObject {
                 that.occupyCell($lastEmptyCell,that.player);
                 that.updateGameState(collum,row,that.player,false);
             }
+            playSound();
          })
 
          console.log("set up");
 
-         function play() {
+         function playSound() {
             var audio = document.getElementById('audio');
-            if (audio.paused) {
-                audio.play();
-            }else{
-                audio.currentTime = 0
-            }
+            audio.play();
         }
     }
 

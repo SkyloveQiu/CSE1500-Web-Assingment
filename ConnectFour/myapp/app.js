@@ -17,7 +17,7 @@ var app = express();
 app.use(express.static(__dirname+"/public"));
 
 app.get('/',(req,res) => {
-    res.render("/Users/skylove/CSE1500/Web-Assignment/ConnectFour/myapp/views/splash.ejs",{ players_connected: gameStatusObj.getPlayerConnected(), games_won: gameStatusObj.getGameCompleted(), game_init: gameStatusObj.getGameInitialized()})
+    res.render("views/splash.ejs",{ players_connected: gameStatusObj.getPlayerConnected(), games_won: gameStatusObj.getGameCompleted(), game_init: gameStatusObj.getGameInitialized()})
 })
 
 app.get('/game', function (req, res) {
