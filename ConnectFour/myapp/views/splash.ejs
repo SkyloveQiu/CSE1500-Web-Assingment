@@ -20,7 +20,10 @@
     <p>The thing what you need to do in this game, is very easy but if you can astonish your opponent by your strategic movements, you can easily complete the game successfully. The game is played on a board which you try to sort your four men horizontal, vertical or cross. When you do this sort, you will be the winner of the game. Call your friend right now and let the game begin!</p>
   </div>
   <div class="startGame">
-    <button type="submit"><img src="images/noun_start_2262245.png"/> </button>
+    <form action="/game" method="get">
+      <button type="submit"><img src="images/noun_start_2262245.png"/> </button>
+    </form>
+    
     <h2>Play now!</h2>
     <br/>
     <br/>
@@ -37,6 +40,8 @@
       Games won: <span id="stat2"><%= games_won %></span></br>
       Game start: <span id="stat3"><%= game_init %></span>
     </p>
+    <h3>Client Data</h3>
+    <p>Games Played: <span id="CookieData"><%= game_played %></span></p>
   </div>
 
 </main>

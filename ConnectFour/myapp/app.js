@@ -1,11 +1,9 @@
-
-
 var express = require("express");
 var http = require("http");
 var websocket = require("ws");
 var Game = require("./server/game")
 var GameStatus = require("./server/GameStatus");
-
+var cookieParser = require("cookie-parser");
 
 var messages = require("./public/javascripts/messages")
 var gameStatusObj = new GameStatus();
@@ -14,14 +12,37 @@ var gameStatusObj = new GameStatus();
 var port = 3000;
 var app = express();
 
+
+app.use(cookieParser());
 app.use(express.static(__dirname+"/public"));
 
-app.get('/',(req,res) => {
-    res.render("views/splash.ejs",{ players_connected: gameStatusObj.getPlayerConnected(), games_won: gameStatusObj.getGameCompleted(), game_init: gameStatusObj.getGameInitialized()})
+
+app.get('/',function(req,res,next){
+    if (!req.cookies.gamePlayed) {
+        var date = new Date();
+        date.setMilliseconds(date.getMilliseconds() + 1000 * 60 * 60 * 24 * 90);
+
+        res.cookie("gamePlayed",0,{"expires":date});
+    }
+    next();
+});
+
+
+
+
+app.get('/',(req,res,next) => {
+    res.render("/Users/skylove/CSE1500/ConnectFour/myapp/views/splash.ejs",{ players_connected: gameStatusObj.getPlayerConnected(),
+         games_won: gameStatusObj.getGameCompleted(), 
+         game_init: gameStatusObj.getGameInitialized(),
+         game_played: req.cookies.gamePlayed
+        })
 })
 
+
+
+
 app.get('/game', function (req, res) {
-    res.sendFile("game.html", {root: "./public/game"});
+    res.sendFile("game.html", {root: "./myapp/public"});
 });
 
 var server = http.createServer(app);

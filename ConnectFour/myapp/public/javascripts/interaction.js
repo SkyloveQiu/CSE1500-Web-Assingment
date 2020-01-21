@@ -42,7 +42,18 @@
 
 
         if (incomingMessage.type === Messages.T_YOU_LOST) {
+            
+            
+            
             gameObject.setTurn(false);
+            let date = new Date();
+            date.setMilliseconds(date.getMilliseconds() + 1000*60*60*24*90);
+
+
+            let gamePlayed = getCookie("gamePlayed");
+            gamePlayed++;
+            document.cookie = "gamePlayed=" + gamePlayed + "; expires=" + date; 
+
             alert("You lost this game");
         }
 
@@ -58,3 +69,23 @@
      console.log("game ready");
 
 })();
+
+
+
+
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
