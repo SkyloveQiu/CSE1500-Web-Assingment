@@ -8,13 +8,13 @@ var cookieParser = require("cookie-parser");
 var messages = require("./public/javascripts/messages")
 var gameStatusObj = new GameStatus();
 
-
 var port = 3000;
 var app = express();
 
 
+app.set("view engine", "ejs");
 app.use(cookieParser());
-app.use(express.static(__dirname+"/public"));
+app.use(express.static(__dirname +"/public"));
 
 
 app.get('/',function(req,res,next){
@@ -31,7 +31,7 @@ app.get('/',function(req,res,next){
 
 
 app.get('/',(req,res,next) => {
-    res.render("/Users/skylove/Desktop/ConnectFour的副本/myapp/views/splash.ejs",{ players_connected: gameStatusObj.getPlayerConnected(),
+    res.render("../myapp/views/splash.ejs",{ players_connected: gameStatusObj.getPlayerConnected(),
          games_won: gameStatusObj.getGameCompleted(), 
          game_init: gameStatusObj.getGameInitialized(),
          game_played: req.cookies.gamePlayed
