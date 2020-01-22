@@ -1,6 +1,6 @@
 (function setup() {
     var socket = new WebSocket("ws://localhost:3000");
-
+    
     const gameObject = new GameObject('#game',socket);
     if(window.matchMedia("(max-width:300px), (max-height:400px)" ).matches){
         alert("Your screen resolution is too low, change a machine please!");

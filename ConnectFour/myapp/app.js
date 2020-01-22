@@ -31,7 +31,7 @@ app.get('/',function(req,res,next){
 
 
 app.get('/',(req,res,next) => {
-    res.render("/Users/skylove/CSE1500/ConnectFour/myapp/views/splash.ejs",{ players_connected: gameStatusObj.getPlayerConnected(),
+    res.render("/Users/skylove/Desktop/ConnectFour的副本/myapp/views/splash.ejs",{ players_connected: gameStatusObj.getPlayerConnected(),
          games_won: gameStatusObj.getGameCompleted(), 
          game_init: gameStatusObj.getGameInitialized(),
          game_played: req.cookies.gamePlayed

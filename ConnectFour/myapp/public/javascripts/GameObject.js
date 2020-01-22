@@ -7,7 +7,7 @@ class GameObject {
         this.socket = socket;
         this.player = null;
         this.turn = false;
-        
+        this.fullScreen = false;
         
         
     }
@@ -111,7 +111,16 @@ class GameObject {
             }
         })
 
-
+        $("#FullScreen").click(function () { 
+            if (that.fullScreen === false) {
+                $board.addClass("full");
+                that.fullScreen = true;
+            } else {
+                $board.removeClass("full");
+                that.fullScreen = false;
+            }
+            
+        });
         $board.on('click','.collum.empty',function () { 
             console.log(that.turn);
             if (that.turn === true) {
