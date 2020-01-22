@@ -62,6 +62,11 @@
             alert("You win this game");
         }
 
+        if(window.matchMedia("(max-width:300px), (max-height:400px)" ).matches){
+            alert("Your screen resolution is too low, change a machine please!");
+        }
+
+
 
 
 

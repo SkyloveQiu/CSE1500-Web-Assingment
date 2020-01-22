@@ -1,12 +1,12 @@
 1.2
 
-Yes, it's exacty same.
+Yes, it's exactly same.
 
 
 1.3
 
 transfer-encoding is a way to speed up the website.
-it devides the whole transfer mission to several pieces, It can help user to see the website text first.
+it divides the whole transfer mission to several pieces, It can help user to see the website text first.
 Then the browser can load all the elements later such as videos and Sounds.
 
 
