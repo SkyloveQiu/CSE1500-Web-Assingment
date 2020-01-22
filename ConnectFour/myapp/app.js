@@ -280,6 +280,7 @@ WebSocketServer.on("connection", function connection(ws) {
                 }
     
                 try {
+                    gameObj.Red.send(messages.S_STOP_GAME);
                     gameObj.Red.close();
                     gameObj.Red = null;
                     gameStatusObj.removePlayerConnected();
@@ -288,6 +289,7 @@ WebSocketServer.on("connection", function connection(ws) {
                 }
     
                 try {
+                    gameObj.black.send(messages.S_STOP_GAME);
                     gameObj.black.close();
                     gameObj.black = null;
                     gameStatusObj.removePlayerConnected();

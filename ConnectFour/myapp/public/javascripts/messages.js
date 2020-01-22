@@ -26,6 +26,15 @@
         type: exports.T_INVALID_DROP
     }
     exports.S_INVALID_DROP = JSON.stringify(exports.O_INVALID_DROP);
+
+
+    exports.T_STOP_GAME = "STOP-GAME";
+    exports.O_STOP_GAME = {
+        type: exports.T_STOP_GAME
+    }
+    exports.S_STOP_GAME = JSON.stringify(exports.O_STOP_GAME);
+
+
     exports.T_YOU_LOST = "YOU_LOST";
     exports.O_YOU_LOST = {
         type: exports.T_YOU_LOST

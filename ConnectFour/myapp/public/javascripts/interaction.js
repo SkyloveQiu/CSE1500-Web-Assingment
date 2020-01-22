@@ -2,7 +2,9 @@
     var socket = new WebSocket("ws://localhost:3000");
 
     const gameObject = new GameObject('#game',socket);
-
+    if(window.matchMedia("(max-width:300px), (max-height:400px)" ).matches){
+        alert("Your screen resolution is too low, change a machine please!");
+    }
     socket.onmessage = function (event) { 
         console.log("message recieved");
         let incomingMessage = JSON.parse(event.data);
@@ -62,8 +64,9 @@
             alert("You win this game");
         }
 
-        if(window.matchMedia("(max-width:300px), (max-height:400px)" ).matches){
-            alert("Your screen resolution is too low, change a machine please!");
+        if(incomingMessage.type === Messages.T_STOP_GAME) {
+            gameObject.setTurn(false);
+            alert("Player exit this game, this game is ended");
         }
 
 
